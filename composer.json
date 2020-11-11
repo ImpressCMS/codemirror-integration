@@ -1,0 +1,31 @@
+{
+    "name": "impresscms/codemirror-integration",
+    "description": "Integrates CodeMirror with ImpressCMS",
+    "type": "impresscms-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raimondas Rimkevičius",
+            "email": "mekdrop@impresscms.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ImpressCMS\\Modules\\CodeMirrorIntegration\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/translation": "^5.1"
+    },
+    "extra": {
+        "codemirror": {
+            "class": "\\ImpressCMS\\Modules\\CodeMirrorIntegration\\Editor",
+            "arguments": [
+              "translator"
+            ],
+            "tags": [
+                "editor.source"
+            ]
+        }
+    }
+}
