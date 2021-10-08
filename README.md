@@ -1,6 +1,6 @@
 # CodeMirror integration
 
-Integrates [CodeMirror](https://github.com/codemirror/CodeMirror) code ediror with [ImpressCMS](https://github.com/ImpressCMS/impresscms)
+Integrates [CodeMirror](https://github.com/codemirror/CodeMirror) code editor with [ImpressCMS](https://github.com/ImpressCMS/impresscms)
 
 ## How to contribute?
 
