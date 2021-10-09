@@ -15,7 +15,11 @@
         }
     },
     "require": {
-        "symfony/translation": "^5.1"
+        "symfony/translation": "^5.1",
+        "npm-asset/codemirror": "^5.63"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
     },
     "extra": {
         "codemirror": {
@@ -26,6 +30,18 @@
             "tags": [
                 "editor.source"
             ]
+        },
+        "assets": [
+            "vendor/npm-asset/codemirror/lib/",
+            "vendor/npm-asset/codemirror/theme/",
+            "vendor/npm-asset/codemirror/mode/",
+            "vendor/npm-asset/codemirror/addon/"
+        ]
+    },
+    "repositories": {
+        "repo-name": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     }
 }
