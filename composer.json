@@ -19,7 +19,7 @@
         "npm-asset/codemirror": "^5.63",
         "imponeer/editor-contracts": "^1.0",
         "ext-json": "*",
-        "php": ">=7.2.5",
+        "php": ">=7.3",
         "imponeer/symfony-translations-constants-loader": "^1.0"
     },
     "require-dev": {
