@@ -26,6 +26,10 @@
         "roave/security-advisories": "dev-latest"
     },
     "extra": {
+        "icon": {
+            "big": "images/codemirror-logo.png",
+            "small": "images/codemirror-logo.png"
+        },
         "services": {
             "\\ImpressCMS\\Modules\\CodeMirrorIntegration\\EditorInfo": {
                 "class": "\\ImpressCMS\\Modules\\CodeMirrorIntegration\\EditorInfo",
@@ -51,7 +55,7 @@
         ]
     },
     "repositories": {
-        "repo-name": {
+        "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
