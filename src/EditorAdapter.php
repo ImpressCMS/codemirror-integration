@@ -106,8 +106,7 @@ class EditorAdapter implements EditorAdapterInterface
     public function getAttributes(): array
     {
         return [
-            'width' => $this->width,
-            'height' => $this->height,
+            'style' => "width: {$this->width}; height: {$this->height}",
         ];
     }
 
