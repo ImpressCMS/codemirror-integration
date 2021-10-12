@@ -2,16 +2,17 @@
 
 namespace ImpressCMS\Modules\CodeMirrorIntegration;
 
-use Symfony\Component\Translation\Translator;
+use Imponeer\Contracts\Editor\Info\SourceEditorInfoInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Defines CodeMirror editor
+ * Gives a bit info about editor
  *
- * @package ImpressCMS\Plugins\SourceEditors\CodeMirror
+ * @package ImpressCMS\Modules\CodeMirrorIntegration
  */
-class Editor implements EditorInterface
+class EditorInfo implements SourceEditorInfoInterface
 {
+
     /**
      * @var TranslatorInterface
      */
@@ -30,9 +31,17 @@ class Editor implements EditorInterface
     /**
      * @inheritDoc
      */
-    public function getTitle(): string
+    public function getName(): string
     {
         return $this->translator->trans('_ICMS_SOURCEEDITOR_CODEMIRROR', [], 'editor');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isAvailable(): bool
+    {
+        return true;
     }
 
     /**
@@ -54,24 +63,19 @@ class Editor implements EditorInterface
     /**
      * @inheritDoc
      */
-    public function create(array $configs, $checkCompatible = false): \icms_form_elements_Textarea
+    public function getSupportedLanguages(): array
     {
-        return new TextAreaElement($configs, $checkCompatible);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOrder(): ?int
-    {
-        return 1;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function supportsHTML(): bool
-    {
-        return false;
+        return [
+            'html',
+            'xml',
+            'php',
+            'lua',
+            'python',
+            'javascript',
+            'js',
+            'css',
+            'sparql',
+            'mixed',
+        ];
     }
 }
