@@ -33,7 +33,7 @@
                     "translator"
                 ]
             },
-            "editor.codemirror.factory": {
+            "codemirror": {
                 "class": "\\ImpressCMS\\Modules\\CodeMirrorIntegration\\EditorFactory",
                 "arguments": [
                     "\\ImpressCMS\\Modules\\CodeMirrorIntegration\\EditorInfo"
