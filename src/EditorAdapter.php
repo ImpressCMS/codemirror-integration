@@ -3,6 +3,7 @@
 namespace ImpressCMS\Modules\CodeMirrorIntegration;
 
 use Imponeer\Contracts\Editor\Adapter\EditorAdapterInterface;
+use JsonException;
 
 /**
  * Describes editor adapter instance
@@ -141,25 +142,24 @@ class EditorAdapter implements EditorAdapterInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws JsonException
      */
     public function getScriptCode(): string
     {
-        $config = json_encode(
-            [
-                'width' => $this->width,
-                'height' => $this->height,
-                'lineNumbers' => true,
-                'continuousScanning' => 500,
-                'textWrapping' => false,
-                'readOnly' => $this->readonly,
-                'mode' => $this->syntax,
-            ],
-            JSON_PRETTY_PRINT
-        );
+        $config = json_encode([
+            'width' => $this->width,
+            'height' => $this->height,
+            'lineNumbers' => true,
+            'continuousScanning' => 500,
+            'textWrapping' => false,
+            'readOnly' => $this->readonly,
+            'mode' => $this->syntax,
+        ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
 
         $selectorHash = sha1($this->targetSelector);
 
-        return "var editor_{$selectorHash} = CodeMirror.fromTextArea('{$this->targetSelector}', {$config});";
+        return "var editor_{$selectorHash} = CodeMirror.fromTextArea(document.querySelector('{$this->targetSelector}'), {$config});";
     }
 
     /**
