@@ -3,40 +3,55 @@ name: Tests
 on:
   push:
     branches:
-      - main
+      - main  
   pull_request:
     branches:
-      - main
+      - main  
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
-    continue-on-error: false
+  test:
+    runs-on: ${{ matrix.os }}    
     strategy:
       max-parallel: 3
       matrix:
-        composer:
-          - 2
-        php:
+        os:
+          - ubuntu-latest
+        php_version:
           - 7.3
           - 7.4
           - 8.0
           - 8.1
-    name: Test - php:${{ matrix.php }}; composer:${{ matrix.composer }}
+        database:
+          - mysql:5.6
+          - mariadb:10.1
+        impresscms_version:
+          - 2.0.x
+        composer_version:
+          - 2
+
+    services:
+      mysql:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_ROOT_PASSWORD: icms
+          MYSQL_DATABASE: icms
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    name: Test - impresscms:${{ matrix.impresscms_version }}; php:${{ matrix.php_version }}; ${{ matrix.database }}; ${{ matrix.os }}; composer:${{ matrix.composer_version }};
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Install PHP
-        uses: shivammathur/setup-php@master
+      - name: Checkouting project code...
+        uses: actions/checkout@v2
+
+      - name: Testing addon...
+        uses: impresscms-dev/test-impresscms-addon-action@v0.1
         with:
-          php-version: ${{ matrix.php }}
-          extensions: curl, gd, pdo_mysql, json, mbstring, pcre, session
-          ini-values: post_max_size=256M
-          coverage: none
-          tools: composer:v${{ matrix.composer }}
-      - name: Composer validate
-        run: composer validate --strict --no-check-lock
-      - name: Install Composer dependencies (with dev)
-        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
-      - name: Install Composer dependencies (without dev)
-        run: composer install --no-progress --no-dev --no-suggest --prefer-dist --optimize-autoloader
+          impresscms_version: ${{ matrix.impresscms_version }}
+          php_version: ${{ matrix.php_version }}
+          composer_version: ${{ matrix.composer_version }}
+          database_type: pdo.mysql
+          database_name: icms
+          database_user: root
+          database_password: icms
+          database_port: ${{ job.services.mysql.ports['3306'] }}
