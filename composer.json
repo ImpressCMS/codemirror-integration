@@ -16,7 +16,7 @@
     },
     "require": {
         "symfony/translation": "^5.1",
-        "npm-asset/codemirror": "^5.63",
+        "npm-asset/codemirror": "^6.0",
         "imponeer/editor-contracts": "^1.0",
         "ext-json": "*",
         "php": ">=7.3",
