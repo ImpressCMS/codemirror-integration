@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Testing addon...
-        uses: impresscms-dev/test-impresscms-addon-action@v0.2
+        uses: impresscms-dev/test-impresscms-addon-action@v0.3
         with:
           impresscms_version: ${{ matrix.impresscms_version }}
           php_version: ${{ matrix.php_version }}
