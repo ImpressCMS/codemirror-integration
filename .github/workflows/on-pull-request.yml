@@ -41,7 +41,7 @@ jobs:
     name: Test - impresscms:${{ matrix.impresscms_version }}; php:${{ matrix.php_version }}; ${{ matrix.database }}; ${{ matrix.os }}; composer:${{ matrix.composer_version }};
     steps:
       - name: Checkouting project code...
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Testing addon...
         uses: impresscms-dev/test-impresscms-addon-action@v0.3
